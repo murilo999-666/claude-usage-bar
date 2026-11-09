@@ -1,0 +1,189 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [
+        {
+            "command": {
+                "action": "copy",
+                "singleLine": false
+            },
+            "id": "User.copy"
+        },
+        {
+            "command": "paste",
+            "id": "User.paste"
+        }
+    ],
+    "alwaysShowTabs": true,
+    "centerOnLaunch": true,
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "trimBlockSelection": true,
+    "trimPaste": true,
+    "warning.largePaste": false,
+    "warning.multiLinePaste": false,
+    "defaultProfile": "{6f1c2a3e-0c1d-4b8a-9d2f-c1a0de000001}",
+    "disableAnimations": false,
+    "disabledProfileSources": [
+        "Windows.Terminal.Wsl",
+        "Windows.Terminal.Azure",
+        "Windows.Terminal.PowershellCore",
+        "Windows.Terminal.SshProfileGenerator",
+        "Windows.Terminal.VisualStudio"
+    ],
+    "firstWindowPreference": "defaultProfile",
+    "initialCols": 112,
+    "initialRows": 32,
+    "keybindings": [
+        {
+            "id": null,
+            "keys": "ctrl+shift+t"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+n"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+d"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+space"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+d"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+plus"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+minus"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+1"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+2"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+3"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+tab"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+tab"
+        },
+        {
+            "id": "User.copy",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "User.paste",
+            "keys": "ctrl+v"
+        }
+    ],
+    "launchMode": "default",
+    "newTabMenu": [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": {
+        "defaults": {},
+        "list": [
+            {
+                "adjustIndistinguishableColors": "indexed",
+                "antialiasingMode": "grayscale",
+                "bellStyle": "taskbar",
+                "closeOnExit": "graceful",
+                "colorScheme": "Claude Clay",
+                "commandline": "cmd.exe /c claude",
+                "cursorHeight": 25,
+                "cursorShape": "bar",
+                "experimental.pixelShaderPath": "__APP__\\claude-fundo.hlsl",
+                "font": {
+                    "cellHeight": "1.32",
+                    "face": "__FONT__",
+                    "features": {
+                        "calt": 1,
+                        "liga": 1
+                    },
+                    "size": 11.5,
+                    "weight": "normal"
+                },
+                "guid": "{6f1c2a3e-0c1d-4b8a-9d2f-c1a0de000001}",
+                "icon": "__APP__\\claude.ico",
+                "intenseTextStyle": "bold",
+                "name": "Claude",
+                "opacity": 100,
+                "padding": "20, 14, 20, 46",
+                "scrollbarState": "hidden",
+                "startingDirectory": "%USERPROFILE%",
+                "tabTitle": "Claude Code",
+                "useAcrylic": false
+            }
+        ]
+    },
+    "schemes": [
+        {
+            "background": "#191513",
+            "black": "#2B2420",
+            "blue": "#82A9DE",
+            "brightBlack": "#6E625A",
+            "brightBlue": "#A3C2EC",
+            "brightCyan": "#A0DDD3",
+            "brightGreen": "#BCD6A3",
+            "brightPurple": "#D0BCF2",
+            "brightRed": "#F0907A",
+            "brightWhite": "#FAF5EE",
+            "brightYellow": "#F2CD8C",
+            "cursorColor": "#E0805F",
+            "cyan": "#7FC8BC",
+            "foreground": "#ECE4D8",
+            "green": "#A5C48A",
+            "name": "Claude Clay",
+            "purple": "#B9A0E6",
+            "red": "#E5735E",
+            "selectionBackground": "#5A3527",
+            "white": "#D9D0C3",
+            "yellow": "#E8B86A"
+        }
+    ],
+    "showTabsInTitlebar": true,
+    "showTerminalTitleInTitlebar": true,
+    "theme": "Claude",
+    "themes": [
+        {
+            "name": "Claude",
+            "tab": {
+                "background": "terminalBackground",
+                "iconStyle": "default",
+                "showCloseButton": "never",
+                "unfocusedBackground": "terminalBackground"
+            },
+            "tabRow": {
+                "background": "#120F0EFF",
+                "unfocusedBackground": "#120F0EFF"
+            },
+            "window": {
+                "applicationTheme": "dark",
+                "experimental.rainbowFrame": false,
+                "frame": "#3A2A22FF",
+                "unfocusedFrame": "#241D19FF",
+                "useMica": true
+            }
+        }
+    ],
+    "warning.confirmCloseAllTabs": false,
+    "windowingBehavior": "useNew"
+}

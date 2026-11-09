@@ -16,6 +16,21 @@ Uma barra colorida de uso para a barra de status do [Claude Code](https://claude
 
 Os números são da conta inteira (claude.ai, apps do computador e do celular e todas as janelas do Claude Code), os mesmos do `/usage`.
 
+## Novo na v2: o Claude Code em abas (Windows)
+
+No Windows (x64), o mesmo instalador também instala um **app Claude Code**: o Claude Code numa janela própria, com uma aba por sessão, feito para funcionar bem em metade da tela.
+
+- **Abas** na barra de título, cada uma com o Clawd animado (trabalhando ou parado) e o título da sessão. Bolinha laranja = o Claude está esperando você. O `+` abre uma sessão; o `×` fecha (pergunta antes se ela estiver trabalhando).
+- **Ctrl+→ / Ctrl+←** vão para a aba do lado.
+- **Rodapé** com Pronto / Trabalhando / Esperando você e botões para trocar o **modelo** e o **esforço**. Ele digita o `/model` ou o `/effort` por você, só quando a caixa de texto do Claude está à vista; o que você já tinha digitado fica guardado.
+- **Arraste** a janela pelas abas. Solte na borda esquerda ou direita para meia tela, num canto para um quarto, no topo para maximizar. Sessões novas abrem no mesmo lugar.
+- **Copiar e colar como num editor de texto:** marque com o mouse, Ctrl+C copia, Ctrl+V cola texto, e um print na área de transferência é colado como imagem.
+- E a barra de uso lá embaixo, claro.
+
+O instalador baixa o [Windows Terminal](https://github.com/microsoft/terminal) 1.25 portátil oficial (12 MB, conferido pelo SHA-256) para a pasta do programa, então o Windows Terminal que você já tem não é mexido. Depois cria o atalho **Claude Code** no menu Iniciar e na área de trabalho e abre o app. Para deixar na barra de tarefas: botão direito no ícone dele → **Fixar na barra de tarefas**.
+
+Precisa do Claude Code instalado (o comando `claude`). Não quer o app? Instale com `--no-app`.
+
 ## Instalar
 
 ### Windows
@@ -46,6 +61,7 @@ Depois reinicie o Claude Code. Não precisa de Node, Python nem de mais nada.
 - faz uma cópia de segurança do seu `settings.json` (`settings.json.bak-claude-usage-bar`) e liga a barra. Ele só mexe na chave `statusLine`; o resto do arquivo fica igualzinho, byte por byte.
 - guarda a sua barra anterior, para a desinstalação trazer ela de volta
 - mostra uma prévia com o seu uso de agora
+- no Windows x64, instala o app de abas em `~/.claude/claude-usage-bar/app/` (veja acima)
 
 ## Atualizar
 
@@ -65,7 +81,7 @@ Rode o instalador de novo.
 ~/.claude/claude-usage-bar/claude-usage-bar uninstall
 ```
 
-A sua barra anterior volta e a pasta do programa é apagada.
+A sua barra anterior volta e a pasta do programa é apagada. No Windows o app de abas e os atalhos dele vão junto; feche as janelas do app antes (o desinstalador avisa se tiver alguma aberta).
 
 ## Opções
 
@@ -79,6 +95,7 @@ Passe para o instalador e elas ficam gravadas no comando da barra, por exemplo `
 | `--plain` | sem cores (`NO_COLOR` também funciona) |
 | `--no-fetch` | não consulta o uso da conta; usa só o que o Claude Code envia |
 | `--refresh N` | redesenha a cada N segundos (padrão 30) |
+| `--no-app` | Windows: instala só a barra, sem o app de abas |
 
 Na linha do macOS/Linux: `curl -fsSL .../install.sh | sh -s -- --lang pt`.
 
@@ -90,6 +107,7 @@ Na linha do macOS/Linux: `curl -fsSL .../install.sh | sh -s -- --lang pt`.
 - Para os números da conta inteira, ele consulta o mesmo endereço que o `/usage` usa (`api.anthropic.com/api/oauth/usage`), com o login que o Claude Code já salvou (`~/.claude/.credentials.json`, ou o Keychain no macOS). O token só vai para `api.anthropic.com`. Nada mais é enviado para lugar nenhum e não tem telemetria.
 - Faz no máximo uma consulta por minuto, dividida entre todas as janelas abertas (guardada em `~/.claude/claude-usage-bar/usage.json`), em segundo plano, então a barra nunca fica esperando a internet. Se a consulta falha, espera 1 minuto (5 minutos depois de HTTP 429) e continua mostrando os números que o Claude Code envia.
 - Esse endereço não é uma API pública documentada. Se ele mudar, a barra continua com os números que o próprio Claude Code envia.
+- O app de abas roda só no seu computador e não envia nada: ele lê os arquivos de sessão que o Claude Code grava (`~/.claude/sessions/`) para mostrar o estado de cada aba, e a barra guarda o modelo e o esforço de cada sessão em `%LOCALAPPDATA%\claude-launcher\estado\` para o rodapé.
 - Feito para as assinaturas Claude Pro e Max. Com chave de API não existe limite de sessão nem de semana, então só aparecem o contexto e o modelo.
 
 Testado no Windows 11 com o Claude Code 2.1. As versões de macOS e Linux passam nos testes automáticos (instalação e desinstalação inclusive) no GitHub Actions; relatos de uso real são bem-vindos.
@@ -102,6 +120,8 @@ Precisa do Go 1.24 ou mais novo. Não usa nenhuma biblioteca fora a padrão do G
 go test ./...
 go build -trimpath -ldflags "-s -w" -o claude-usage-bar .
 ```
+
+No Windows, compile antes o app de abas (usa o compilador de C# que já vem no Windows, não precisa instalar nada): `winapp\build.cmd`. O código dele está em [`winapp/`](winapp).
 
 Os arquivos das versões são compilados pelo GitHub Actions a partir deste código ([workflow](.github/workflows/build.yml)), com `checksums.txt` e um atestado de origem que dá para conferir com `gh attestation verify <arquivo> --repo murilo999-666/claude-usage-bar`.
 

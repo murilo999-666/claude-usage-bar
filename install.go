@@ -219,6 +219,9 @@ func install(opts options, tr *texts, out io.Writer) error {
 }
 
 func uninstall(tr *texts, out io.Writer) error {
+	if err := uninstallApp(tr, out); err != nil {
+		return err
+	}
 	orig, err := readSettings()
 	if err != nil {
 		return fmt.Errorf(tr.errRead, settingsPath(), err)
@@ -282,6 +285,15 @@ func runInstall(opts options, tr *texts) int {
 		fmt.Println("  " + tr.nothingChanged)
 		return 1
 	}
+	appFailed := false
+	if appSupported() && !opts.noApp {
+		fmt.Println()
+		fmt.Println("  " + tr.appTitle)
+		if err := installApp(tr, os.Stdout); err != nil {
+			fmt.Printf("  ✗ "+tr.appFailed+"\n", err)
+			appFailed = true
+		}
+	}
 
 	p := detectPainter(opts.plain)
 	cache := readCache()
@@ -307,6 +319,9 @@ func runInstall(opts options, tr *texts) int {
 	fmt.Println()
 	fmt.Println("  " + p.bold() + tr.done + p.reset())
 	fmt.Println("  " + p.fg(colMuted) + fmt.Sprintf(tr.howToRemove, filepath.Join(appDir(), binName())) + p.reset())
+	if appFailed {
+		return 1
+	}
 	return 0
 }
 

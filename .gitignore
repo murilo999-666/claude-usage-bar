@@ -2,3 +2,4 @@
 /claude-usage-bar.exe
 /dist/
 *.tmp
+/winapp/bin/

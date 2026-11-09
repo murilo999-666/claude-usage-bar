@@ -24,6 +24,9 @@ type texts struct {
 	pressEnter, unknownCmd                                          string
 	hintNoLogin, hintExpired, hintRateLimited, hintNetwork, hintAny string
 	helpText                                                        string
+
+	appTitle, appCopied, appDownloading, appTerminalOk, appShortcuts string
+	appStarted, appNoClaude, appInUse, appFailed, appRemoved         string
 }
 
 func (t *texts) help(v string) string {
@@ -84,6 +87,16 @@ var textsPT = &texts{
 	hintRateLimited: "O servidor pediu para esperar um pouco. A barra tenta de novo sozinha em 5 minutos.",
 	hintNetwork:     "Sem internet agora? A barra tenta de novo sozinha a cada minuto.",
 	hintAny:         "Não consegui buscar o uso agora (%s). A barra tenta de novo sozinha.",
+	appTitle:        "App Claude Code (abas):",
+	appCopied:       "App instalado em %s",
+	appDownloading:  "Baixando o Windows Terminal %s portátil (12 MB, do GitHub da Microsoft)…",
+	appTerminalOk:   "Windows Terminal %s pronto",
+	appShortcuts:    "Atalho \"Claude Code\" criado no menu Iniciar e na área de trabalho",
+	appStarted:      "App aberto! Para deixar na barra de tarefas: botão direito no ícone dele → Fixar na barra de tarefas",
+	appNoClaude:     "Não achei o comando claude. Instale o Claude Code (https://claude.com/claude-code) e abra o atalho \"Claude Code\".",
+	appInUse:        "Feche as janelas do app Claude Code e rode de novo.",
+	appFailed:       "O app de abas não foi instalado: %v (a barra funciona normalmente)",
+	appRemoved:      "App Claude Code e atalhos removidos",
 	helpText: `%s %s — barra de uso para o Claude Code
 
 Como usar:
@@ -100,6 +113,7 @@ Opções (servem para o install e ficam gravadas no comando da barra):
   --plain            sem cores
   --hide LISTA       esconde partes: session,week,context,model,effort
   --refresh N        atualiza a barra a cada N segundos (padrão 30)
+  --no-app           Windows: instala só a barra, sem o app de abas
 `,
 }
 
@@ -151,6 +165,16 @@ var textsEN = &texts{
 	hintRateLimited: "The server asked to wait a bit. The bar tries again by itself in 5 minutes.",
 	hintNetwork:     "No internet right now? The bar tries again by itself every minute.",
 	hintAny:         "Could not fetch usage right now (%s). The bar tries again by itself.",
+	appTitle:        "Claude Code app (tabs):",
+	appCopied:       "App installed to %s",
+	appDownloading:  "Downloading portable Windows Terminal %s (12 MB, from Microsoft's GitHub)…",
+	appTerminalOk:   "Windows Terminal %s ready",
+	appShortcuts:    "\"Claude Code\" shortcut added to the Start menu and the desktop",
+	appStarted:      "The app is open! To keep it on the taskbar: right-click its icon → Pin to taskbar",
+	appNoClaude:     "Could not find the claude command. Install Claude Code (https://claude.com/claude-code), then open the \"Claude Code\" shortcut.",
+	appInUse:        "Close the Claude Code app windows and run this again.",
+	appFailed:       "The tabs app was not installed: %v (the bar works as usual)",
+	appRemoved:      "Claude Code app and shortcuts removed",
 	helpText: `%s %s — usage bar for Claude Code
 
 Usage:
@@ -167,6 +191,7 @@ Options (for install; they are saved in the status line command):
   --plain            no colors
   --hide LIST        hide parts: session,week,context,model,effort
   --refresh N        refresh the bar every N seconds (default 30)
+  --no-app           Windows: install only the bar, without the tabs app
 `,
 }
 

@@ -31,6 +31,7 @@ type options struct {
 	hide     map[string]bool
 	refresh  int
 	fetch    bool
+	noApp    bool
 
 	// flags de desenho que o usuário passou, para repetir no comando instalado
 	renderArgs []string
@@ -48,6 +49,7 @@ func parseFlags(args []string, out io.Writer) (options, error) {
 	fs.StringVar(&hide, "hide", "", "")
 	fs.IntVar(&o.refresh, "refresh", 30, "")
 	fs.BoolVar(&o.fetch, "fetch", false, "")
+	fs.BoolVar(&o.noApp, "no-app", false, "")
 	fs.Usage = func() {}
 	if err := fs.Parse(args); err != nil {
 		return o, err

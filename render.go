@@ -15,7 +15,9 @@ import (
 // ---------- o que o Claude Code manda no stdin ----------
 
 type Input struct {
-	Model *struct {
+	SessionID string `json:"session_id"`
+	Model     *struct {
+		ID          string `json:"id"`
 		DisplayName string `json:"display_name"`
 	} `json:"model"`
 	Effort        json.RawMessage `json:"effort"` // {"level":"high"} ou "high"
@@ -495,6 +497,7 @@ func runStatusLine(opts options, tr *texts) {
 			in = &v
 		}
 	}
+	saveLauncherState(in)
 	cache := &Cache{}
 	if !opts.noFetch {
 		cache = readCache()
@@ -550,8 +553,9 @@ func runDemo(opts options) {
 		tr := pickTexts(sc.lang)
 		in := &Input{}
 		in.Model = &struct {
+			ID          string `json:"id"`
 			DisplayName string `json:"display_name"`
-		}{"Opus 5.5"}
+		}{"", "Opus 5.5"}
 		in.Effort, _ = json.Marshal(sc.effort)
 		in.FastMode = sc.fast
 		in.ContextWindow = &struct {
